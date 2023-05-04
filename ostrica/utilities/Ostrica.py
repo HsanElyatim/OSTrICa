@@ -24,7 +24,7 @@ import json
 import traceback
 import threading
 import PluginLoader
-import Queue
+import queue
 
 from cfg import Config as cfg
 
@@ -32,7 +32,7 @@ class OSTrICa:
 
     def __init__(self, input_data=''):
         self.intelligence = []
-        self.intellingece_q = Queue.Queue()
+        self.intellingece_q = queue.Queue()
         self.loader = PluginLoader.PluginLoader()
         if input_data != '':
             self.intellingece_q.put(input_data)
@@ -45,15 +45,15 @@ class OSTrICa:
         while True:
             try:
                 self.intellingece_q.get(block=False)
-            except Queue.Empty:
+            except queue.Empty:
                 if cfg.DEBUG:
-                    print 'clear_intelligence_queue() Queue Empty.'
+                    print ('clear_intelligence_queue() Queue Empty.')
                 break
-            except Exception, e:
+            except Exception as e:
                 if cfg.DEBUG:
-                    print 'clear_intelligence_queue() exception triggered %s' % (str(e))
-                print traceback.print_exc()
-
+                    print ('clear_intelligence_queue() exception triggered %s' % (str(e)))
+                print (traceback.print_exc()
+)
     def extract_intelligence_queue_items(self):
         items = []
         i = 0
@@ -66,24 +66,24 @@ class OSTrICa:
         raw_data_for_intel = self.intellingece_q.get(block=False)
         if raw_data_for_intel['extraction_type'] in cfg.intelligence_type.values():
             if cfg.DEBUG:
-                print 'Working on %s' % (raw_data_for_intel['intelligence_information'])
+                print ('Working on %s' % (raw_data_for_intel['intelligence_information']))
             self.loading_plugins(raw_data_for_intel)
         else:
             if cfg.DEBUG:
-                print 'Plugin for %s not implemented' % (raw_data_for_intel['extraction_type'])
+                print ('Plugin for %s not implemented' % (raw_data_for_intel['extraction_type']))
 
     def intelligence_gathering(self):
         while True:
             try:
                 self.parsing_intelligence_queue()
-            except Queue.Empty:
+            except queue.Empty:
                 if cfg.DEBUG:
-                    print 'intelligence_gathering() Queue Empty'
+                    print ('intelligence_gathering() Queue Empty')
                 break
-            except Exception, e:
+            except Exception as e:
                 if cfg.DEBUG:
-                    print 'intelligence_gathering() exception triggered %s' % (str(e))
-                print traceback.print_exc()
+                    print ('intelligence_gathering() exception triggered %s' % (str(e)))
+                print (traceback.print_exc())
 
     def loading_plugins(self, raw_data_for_intel):
         for plugin in self.loader.plugins:
@@ -93,13 +93,13 @@ class OSTrICa:
         for extraction_type in plugin['extraction_type']:
             if extraction_type == intelligence_type:
                 if cfg.DEBUG:
-                    print 'Requested intelligence method %s is valid for %s!' % (intelligence_type, plugin['name'])
+                    print ('Requested intelligence method %s is valid for %s!' % (intelligence_type, plugin['name']))
                 try:
                     self.save_intelligence(intelligence_information, intelligence_type, plugin['name'], plugin['plugin'].run(intelligence_information, extraction_type))
-                except Exception, e:
+                except Exception as e:
                     if cfg.DEBUG:
-                        print 'call_plugin_method() exception %s (%s)!' % (str(e), plugin['name'])
-                        print traceback.print_exc()
+                        print ('call_plugin_method() exception %s (%s)!' % (str(e), plugin['name']))
+                        print (traceback.print_exc())
 
     def fill_intelligence_queue(self, requested_intel, requested_intel_type, plugin_name, extracted_intelligence):
         if extracted_intelligence is not None:
@@ -114,31 +114,31 @@ class OSTrICa:
         for plugin in self.loader.plugins:
             try:
                 nodes, edges = plugin['plugin'].data_visualization(nodes, edges, json_data)
-            except Exception, e:
+            except Exception as e:
                 if cfg.DEBUG:
-                    print 'plugin_data_visualization() exception %s (%s)!' % (str(e), plugin['name'])
-                    print traceback.print_exc()
+                    print ('plugin_data_visualization() exception %s (%s)!' % (str(e), plugin['name']))
+                    print (traceback.print_exc())
         return nodes, edges
 
     def plugins_info(self):
         for plugin in self.loader.plugins:
             try:
                 if plugin['plugin'].enabled:
-                    print 'Plugin %s (v%s) [ENABLED]' % (plugin['name'], plugin['plugin'].version)
+                    print ('Plugin %s (v%s) [ENABLED]' % (plugin['name'], plugin['plugin'].version))
                 else:
-                    print 'Plugin %s (v%s) [DISABLED]' % (plugin['plugin'], plugin['plugin'].version)
+                    print ('Plugin %s (v%s) [DISABLED]' % (plugin['plugin'], plugin['plugin'].version))
 
-                print 'Developed by %s' % (plugin['plugin'].developer)
-                print 'Description: %s' % (plugin['plugin'].description)
+                print ('Developed by %s' % (plugin['plugin'].developer))
+                print ('Description: %s' % (plugin['plugin'].description))
                 if plugin['plugin'].visual_data:
-                    print 'Visual data ENABLED'
+                    print ('Visual data ENABLED')
                 else:
-                    print 'Visual data DISABLED'
-                print 'Available extraction types:'
+                    print ('Visual data DISABLED')
+                print ('Available extraction types:')
                 for ext_type in plugin['plugin'].extraction_type:
-                    print '\t %s' % ext_type
-                print '\n\n'
-            except Exception, e:
+                    print ('\t %s' % ext_type)
+                print ('\n\n')
+            except Exception as e:
                 if cfg.DEBUG:
-                    print 'plugins_info() exception %s (%s)!' % (str(e), plugin['plugin'])
-                    print traceback.print_exc()
+                    print ('plugins_info() exception %s (%s)!' % (str(e), plugin['plugin']))
+                    print (traceback.print_exc())
