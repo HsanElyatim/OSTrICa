@@ -20,12 +20,12 @@
 #				You should have received a copy of the GNU General Public License
 #				along with OSTrICa. If not, see <http://www.gnu.org/licenses/>.
 #-------------------------------------------------------------------------------
-import httplib
+import http.client as httplib
+from io import StringIO
 import string
 import socket
 import gzip
 import re
-import StringIO
 from bs4 import BeautifulSoup
 
 from ostrica.utilities.cfg import Config as cfg
@@ -48,7 +48,7 @@ class WebSiteInformer:
 
     def __del__(self):
         if cfg.DEBUG:
-            print 'cleanup WebSiteInformer...'
+            print ('cleanup WebSiteInformer...')
         self.intelligence = {}
 
     def email_information(self, email):
@@ -111,7 +111,7 @@ class WebSiteInformer:
 
 def run(intelligence, extraction_type):
     if cfg.DEBUG:
-        print 'Running WebSiteInformer() on %s' % intelligence
+        print ('Running WebSiteInformer() on %s' % intelligence)
     intel_collector = WebSiteInformer()
     if extraction_type == cfg.intelligence_type['email']:
         if intel_collector.email_information(intelligence) == True:

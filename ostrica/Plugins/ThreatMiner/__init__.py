@@ -45,7 +45,7 @@ class ThreatMiner:
 
     def __del__(self):
         if cfg.DEBUG:
-            print 'cleanup ThreatMiner...'
+            print ('cleanup ThreatMiner...')
         self.intelligence = {}
 
     def extract_whois_emails(self, intel):
@@ -184,9 +184,9 @@ class ThreatMiner:
 
 def run(intelligence, extraction_type):
     if cfg.DEBUG:
-        print 'Running ThreatMiner() on %s' % intelligence
+        print ('Running ThreatMiner() on %s' % intelligence)
     if cfg.threat_miner_limit and cfg.DEBUG:
-        print 'ThreatMiner limit is set...'
+        print ('ThreatMiner limit is set...')
 
     intel_collector = ThreatMiner()
     if extraction_type == cfg.intelligence_type['ip']:

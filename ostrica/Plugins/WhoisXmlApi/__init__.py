@@ -21,12 +21,13 @@
 #				along with OSTrICa. If not, see <http://www.gnu.org/licenses/>.
 #-------------------------------------------------------------------------------
 import sys
-import httplib
+import http.client as httplib
+from io import StringIO
 import string
 import socket
 import gzip
 import re
-import StringIO
+
 import dns
 import json
 import dns.resolver
@@ -51,7 +52,7 @@ class WhoisXmlApi:
 
     def __del__(self):
         if cfg.DEBUG:
-            print 'cleanup WhoisXmlApi...'
+            print ('cleanup WhoisXmlApi...')
         self.intelligence = {}
 
     def whois(self, domain):
@@ -75,7 +76,7 @@ class WhoisXmlApi:
 
 def run(intelligence, extraction_type):
     if cfg.DEBUG:
-        print 'Running WhoisXmlApi() on %s' % intelligence
+        print ('Running WhoisXmlApi() on %s' % intelligence)
 
     intel_collector = WhoisXmlApi()
     if extraction_type == cfg.intelligence_type['ip']:

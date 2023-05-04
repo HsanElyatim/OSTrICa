@@ -21,12 +21,12 @@
 #				along with OSTrICa. If not, see <http://www.gnu.org/licenses/>.
 #-------------------------------------------------------------------------------
 import sys
-import httplib
+import http.client as httplib
+from io import StringIO
 import string
 import socket
 import gzip
 import re
-import StringIO
 import json
 from bs4 import BeautifulSoup
 
@@ -49,7 +49,7 @@ class SafeBrowsing:
 
     def __del__(self):
         if cfg.DEBUG:
-            print 'cleanup SafeBrowsing...'
+            print ('cleanup SafeBrowsing...')
         self.intelligence = {}
 
     def extract_json(self, server_response):
@@ -96,7 +96,7 @@ class SafeBrowsing:
 
 def run(intelligence, extraction_type):
     if cfg.DEBUG:
-        print 'Running SafeBrowsing() on %s' % intelligence
+        print ('Running SafeBrowsing() on %s' % intelligence)
 
     intel_collector = SafeBrowsing()
     if (extraction_type == cfg.intelligence_type['ip']) or (extraction_type == cfg.intelligence_type['domain']):

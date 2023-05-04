@@ -135,13 +135,13 @@ class PyWhoIs:
 
     def __del__(self):
         if cfg.DEBUG:
-            print 'cleanup PyWhoIs...'
+            print ('cleanup PyWhoIs...')
         self.intelligence = {}
 
 
 def run(intelligence, extraction_type):
     if cfg.DEBUG:
-        print 'Running PyWhoIs() on %s' % intelligence
+        print ('Running PyWhoIs() on %s' % intelligence)
 
     intel_collector = PyWhoIs()
     if extraction_type == cfg.intelligence_type['ip']:

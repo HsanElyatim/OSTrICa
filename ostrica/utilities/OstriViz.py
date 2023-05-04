@@ -78,7 +78,7 @@ class OstriViz:
         fh.write(self.nodes_html)
         fh.write(self.generate_html_footer())
         fh.close()
-        print 'Graph generated in %s' % (filename)
+        print ('Graph generated in %s' % (filename))
 
     def _load_nodes(self, ext_nodes, ext_edges, ext_original_intel):
         self.nodes = ext_nodes

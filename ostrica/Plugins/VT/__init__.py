@@ -22,7 +22,7 @@
 #-------------------------------------------------------------------------------
 import traceback
 import datetime
-import httplib
+import http.client as httplib
 import string
 import socket
 import sys
@@ -57,7 +57,7 @@ class VT:
 
     def __del__(self):
         if cfg.DEBUG:
-            print 'cleanup VirusTotal...'
+            print ('cleanup VirusTotal...')
         self.intelligence = {}
 
     @staticmethod
@@ -275,7 +275,7 @@ class VT:
                 self.last_submission_date = date_to_convert[:pos].strip()
             return True
         except:
-            print traceback.print_exc()
+            print (traceback.print_exc())
             return False
 
 
@@ -327,7 +327,7 @@ class VTNetwork:
 
     def __del__(self):
         if cfg.DEBUG:
-            print 'cleanup VirusTotal Network...'
+            print ('cleanup VirusTotal Network...')
         self.intelligence = {}
 
     def get_domain_intelligence(self, domain):
@@ -449,7 +449,7 @@ class VTNetwork:
 
 def run(intelligence, extraction_type):
     if cfg.DEBUG:
-        print 'Running VT() on %s' % intelligence
+        print ('Running VT() on %s' % intelligence)
     if extraction_type == cfg.intelligence_type['sha256']:
         intel_collector = VT()
         if intel_collector.get_detections_by_sha256(intelligence) == True:

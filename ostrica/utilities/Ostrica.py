@@ -23,7 +23,7 @@
 import json
 import traceback
 import threading
-from ostrica.utilities.PluginLoader import PluginLoader
+from ostrica.utilities import PluginLoader
 import queue
 
 from ostrica.utilities.cfg import Config as cfg

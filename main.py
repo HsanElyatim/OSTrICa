@@ -170,7 +170,7 @@ class OstricaConsole:
 
     def console(self):
         while 1:
-            data_input = raw_input("> ")
+            data_input = input("> ")
             intelligence = data_input.split('=')
             if len(intelligence) == 2:
                 intelligence_type = intelligence[0].strip()
@@ -181,7 +181,7 @@ class OstricaConsole:
                 self.parse_intelligence_type(intelligence_type, '')
 
 def main():
-    print ('%s v.%s - %s') % (cfg.tool_name, cfg.version, cfg.tool_description)
+    print (('%s v.%s - %s') % (cfg.tool_name, cfg.version, cfg.tool_description))
     print ('Developed by: %s <%s>' % (cfg.developer, cfg.developer_email))
     print ('write "help" for help')
 

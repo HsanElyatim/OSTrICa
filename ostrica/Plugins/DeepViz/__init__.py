@@ -22,7 +22,7 @@
 #-------------------------------------------------------------------------------
 import traceback
 import datetime
-import httplib
+import http.client as httplib
 import urllib
 import string
 import socket
@@ -78,12 +78,12 @@ class DeepViz:
 
 def run(intelligence, extraction_type):
     if cfg.DEBUG:
-        print 'Running DeepViz() on %s' % intelligence
+        print ('Running DeepViz() on %s' % intelligence)
     if enabled == False:
         return {'extraction_type': extraction_type, 'intelligence_information':{}}
     intel_collector = DeepViz()
     if intel_collector.api_key == 'YOUR_KEY_HERE':
-        print '[!!] DeepViz() module requires your API key. Please add it in the plugin.'
+        print ('[!!] DeepViz() module requires your API key. Please add it in the plugin.')
         return {'extraction_type': extraction_type, 'intelligence_information':{}}
     if extraction_type == cfg.intelligence_type['md5']:
         md5_intel = intel_collector.get_deepviz_behavior_by_md5(intelligence)

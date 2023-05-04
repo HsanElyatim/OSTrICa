@@ -46,7 +46,7 @@ class ThreatCrowd:
 
     def __del__(self):
         if cfg.DEBUG:
-            print 'cleanup ThreatCrowd...'
+            print ('cleanup ThreatCrowd...')
         self.intelligence = {}
 
     def fill_intelligence_dictionary(self, intel):
@@ -85,9 +85,9 @@ class ThreatCrowd:
 
 def run(intelligence, extraction_type):
     if cfg.DEBUG:
-        print 'Running ThreatCrowd() on %s' % intelligence
+        print ('Running ThreatCrowd() on %s' % intelligence)
     if cfg.threat_crowd_limit:
-        print 'ThreatCrowd limit is set (as per limits described on GitHub ThreatCrowd ApiV2)'
+        print ('ThreatCrowd limit is set (as per limits described on GitHub ThreatCrowd ApiV2)')
 
     intel_collector = ThreatCrowd()
     if extraction_type == cfg.intelligence_type['ip']:

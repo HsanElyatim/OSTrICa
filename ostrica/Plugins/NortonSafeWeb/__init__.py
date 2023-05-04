@@ -50,7 +50,7 @@ class NortonSafeWeb:
 
     def __del__(self):
         if cfg.DEBUG:
-            print 'cleanup NortonSafeWeb...'
+            print ('cleanup NortonSafeWeb...')
         self.intelligence = {}
 
     def extract_intelligence(self):
@@ -90,8 +90,8 @@ class NortonSafeWeb:
 
 def run(intelligence, extraction_type):
     if cfg.DEBUG:
-        print 'Running NortonSafeWeb() on %s' % intelligence
-
+        print ('Running NortonSafeWeb() on %s' % intelligence
+)
     intel_collector = NortonSafeWeb()
     if (extraction_type == cfg.intelligence_type['ip']) or (extraction_type == cfg.intelligence_type['domain']):
         if intel_collector.extract_server_info(intelligence) == True:

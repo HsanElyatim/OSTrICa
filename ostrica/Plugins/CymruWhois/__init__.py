@@ -21,12 +21,12 @@
 #				along with OSTrICa. If not, see <http://www.gnu.org/licenses/>.
 #-------------------------------------------------------------------------------
 import sys
-import httplib
+import http.client as httplib
+from io import StringIO
 import string
 import socket
 import gzip
 import re
-import StringIO
 import dns
 import dns.resolver
 from bs4 import BeautifulSoup
@@ -49,7 +49,7 @@ class CymruWhois:
 
     def __del__(self):
         if cfg.DEBUG:
-            print 'cleanup CymruWhois...'
+            print ('cleanup CymruWhois...')
         self.intelligence = {}
 
     def extract_ip_info(self, ip_address):
@@ -69,7 +69,7 @@ class CymruWhois:
 
 def run(intelligence, extraction_type):
     if cfg.DEBUG:
-        print 'Running CymruWhois() on %s' % intelligence
+        print ('Running CymruWhois() on %s' % intelligence)
 
     intel_collector = CymruWhois()
     if extraction_type == cfg.intelligence_type['ip']:
