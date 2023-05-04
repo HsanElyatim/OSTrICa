@@ -55,22 +55,22 @@ class OstricaConsole:
         self.visualization.generate_graph(self.rnd_fn, self.nodes, self.edges, self.original_intel, graph_typology)
 
     def help(self):
-        print 'Following options are available\n'
-        print '\tdomain - used to collect domains information'
-        print '\tExample: domain=google.com or domain=google.com,yahoo.com'
-        print '\tip - used to collect IP information'
-        print '\tExample: ip=8.8.8.8 or ip=8.8.8.8,173.194.68.99'
-        print '\tmd5 - used to collect MD5 information'
-        print '\tsha256 - used to collect SHA256 information'
-        print '\tasn - used to collect ASN information'
-        print '\temail - used to collect email information'
-        print '\tgraph - generate a graph based on all the information collected'
-        print '\tcola_graph - generate a graph based on all the information collected where nodes do not overlap (it might take a while to generate the graph if there are lots of nodes)'
-        print '\tgclean - clear graph information'
-        print '\tshow - show all information that will be collected'
-        print '\trun - extract intelligece information'
-        print '\thelp - this help'
-        print '\tplugins - show available plugins'
+        print ('Following options are available\n')
+        print ('\tdomain - used to collect domains information')
+        print ('\tExample: domain=google.com or domain=google.com,yahoo.com')
+        print ('\tip - used to collect IP information')
+        print ('\tExample: ip=8.8.8.8 or ip=8.8.8.8,173.194.68.99')
+        print ('\tmd5 - used to collect MD5 information')
+        print ('\tsha256 - used to collect SHA256 information')
+        print ('\tasn - used to collect ASN information')
+        print ('\temail - used to collect email information')
+        print ('\tgraph - generate a graph based on all the information collected')
+        print ('\tcola_graph - generate a graph based on all the information collected where nodes do not overlap (it might take a while to generate the graph if there are lots of nodes)')
+        print ('\tgclean - clear graph information')
+        print ('\tshow - show all information that will be collected')
+        print ('\trun - extract intelligece information')
+        print ('\thelp - this help')
+        print ('\tplugins - show available plugins')
 
     def clean_ostrica_graph(self):
         self.edges = {}
@@ -88,7 +88,7 @@ class OstricaConsole:
             self.nodes, self.edges = self.ostrica.plugin_data_visualization(self.nodes, self.edges, intel)
             fh.write( json.dumps(intel, sort_keys=True, indent=4, separators=(',', ': ')) )
 
-        print 'Output created in %s' % (filename)
+        print ('Output created in %s' % (filename))
         fh.close()
 
     def plugins_info(self):
@@ -99,7 +99,7 @@ class OstricaConsole:
 
     def show_ostrica_queue_elements(self):
         for ostrica_queue in self.ostrica.extract_intelligence_queue_items():
-            print ostrica_queue
+            print (ostrica_queue)
 
     def domain_intelligence(self, domains):
         for domain in domains:
@@ -166,7 +166,7 @@ class OstricaConsole:
         elif intelligence_type.strip() == 'plugins':
             self.plugins_info()
         else:
-            print 'Unknown command.'
+            print ('Unknown command.')
 
     def console(self):
         while 1:
@@ -181,9 +181,9 @@ class OstricaConsole:
                 self.parse_intelligence_type(intelligence_type, '')
 
 def main():
-    print '%s v.%s - %s' % (cfg.tool_name, cfg.version, cfg.tool_description)
-    print 'Developed by: %s <%s>' % (cfg.developer, cfg.developer_email)
-    print 'write "help" for help'
+    print ('%s v.%s - %s') % (cfg.tool_name, cfg.version, cfg.tool_description)
+    print ('Developed by: %s <%s>' % (cfg.developer, cfg.developer_email))
+    print ('write "help" for help')
 
     ostrica_console = OstricaConsole()
     ostrica_console.console()
