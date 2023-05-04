@@ -24,8 +24,7 @@ import traceback
 import inspect
 import imp
 import os
-
-from cfg import Config as cfg
+from ostrica.utilities.cfg import Config as cfg
 
 class PluginLoader(object):
 
